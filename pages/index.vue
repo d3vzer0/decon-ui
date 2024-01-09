@@ -1,107 +1,105 @@
 <template>
-  <div>
-    <div class="flex h-20 justify-between">
-      <div class="text-3xl font-bold uppercase dark:text-slate-200">
-        Decon
-      </div>
-      <div class="text-3xl font-bold uppercase dark:text-slate-200">
-        <a href="https://optyx.io">optyx.io</a>
-      </div>
-    </div>
-    <div class="flex shrink">
-      <div class="min-w-72 max-w-80">
-        <div
-          v-for="(value, key) in facets"
-          :key="key"
-        >
-          <div class="form-control pb-10">
-            <InputsCheckbox
-              :options="value"
-              :title="key"
+  <div class="drawer lg:drawer-open">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <div class="flex shrink">
+        <div class="min-w-96">
+          <div>
+            <input
+              v-model="searchInput"
+              type="text"
+              placeholder="Search here"
+              class="input input-bordered w-full max-w-full"
+              @keyup.enter="searchRequest.query=searchInput"
+            >
+            <ul
+              v-if="suggestionResults.length > 0"
+              tabindex="0"
+              class="menu menu-compact dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box max-h-40 flex-nowrap overflow-auto"
+            >
+              <li
+                v-for="(suggestion, index) in suggestionResults"
+                :key="index"
+              >
+                <a @click="confirmSuggestion(suggestion)">{{ suggestion }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-5">
+            <InputsSimpleGrid
+              :options="platformFacet"
+              title="platform"
               :search="false"
+            />
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <div class="justify-start">
+                <div class="text-lg uppercase font-bold text-slate-200 pb-5">
+                  {{ pageDetails.total_results }} Results
+                </div>
+              </div>
+              <div>
+                <div class="join">
+                  <button
+                    v-if="searchRequest.page.current>1"
+                    class="join-item btn btn-sm"
+                    @click="searchRequest.page.current=pageDetails.current-1"
+                  >
+                    «
+                  </button>
+                  <button
+                    v-if="searchRequest.page.current>1"
+                    class="join-item btn btn-sm"
+                    @click="searchRequest.page.current=1"
+                  >
+                    1
+                  </button>
+                  <button class="join-item btn btn-disabled btn-sm">
+                    {{ pageDetails.current }}
+                  </button>
+                  <button
+                    class="join-item btn btn-sm"
+                    @click="searchRequest.page.current=pageDetails.total_pages"
+                  >
+                    {{ pageDetails.total_pages }}
+                  </button>
+                  <button
+                    class="join-item btn btn-sm"
+                    @click="searchRequest.page.current=pageDetails.current+1"
+                  >
+                    »
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <ResultsCardView
+              v-for="(value, index) in results"
+              :key="index"
+              :data="value"
             />
           </div>
         </div>
       </div>
-      <div class="pl-10 min-w-96">
-        <div>
-          <input
-            v-model="searchInput"
-            type="text"
-            placeholder="Search here"
-            class="input input-bordered w-full max-w-full"
-            @keyup.enter="searchRequest.query=searchInput"
+    </div> 
+    <div class="drawer-side pa-5">
+      <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+      <div class="min-w-72 max-w-80 bg-base-100 pr-10">
+          <div
+            v-for="(value, key) in facets"
+            :key="key"
           >
-          <ul
-            v-if="suggestionResults.length > 0"
-            tabindex="0"
-            class="menu menu-compact dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box max-h-40 flex-nowrap overflow-auto"
-          >
-            <li
-              v-for="(suggestion, index) in suggestionResults"
-              :key="index"
-            >
-              <a @click="confirmSuggestion(suggestion)">{{ suggestion }}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="mt-5">
-          <InputsSimpleGrid
-            :options="platformFacet"
-            title="platform"
-            :search="false"
-          />
-        </div>
-        <div>
-          <div class="flex justify-between">
-            <div class="justify-start">
-              <div class="text-lg uppercase font-bold text-slate-200 pb-5">
-                {{ pageDetails.total_results }} Results
-              </div>
-            </div>
-            <div>
-              <div class="join">
-                <button
-                  v-if="searchRequest.page.current>1"
-                  class="join-item btn btn-sm"
-                  @click="searchRequest.page.current=pageDetails.current-1"
-                >
-                  «
-                </button>
-                <button
-                  v-if="searchRequest.page.current>1"
-                  class="join-item btn btn-sm"
-                  @click="searchRequest.page.current=1"
-                >
-                  1
-                </button>
-                <button class="join-item btn btn-disabled btn-sm">
-                  {{ pageDetails.current }}
-                </button>
-                <button
-                  class="join-item btn btn-sm"
-                  @click="searchRequest.page.current=pageDetails.total_pages"
-                >
-                  {{ pageDetails.total_pages }}
-                </button>
-                <button
-                  class="join-item btn btn-sm"
-                  @click="searchRequest.page.current=pageDetails.current+1"
-                >
-                  »
-                </button>
-              </div>
+            <div class="form-control pb-10">
+              <InputsCheckbox
+                :options="value"
+                :title="key"
+                :search="false"
+              />
             </div>
           </div>
         </div>
-        <div>
-          <ResultsCardView
-            v-for="(value, index) in results"
-            :key="index"
-            :data="value"
-          />
-        </div>
-      </div>
     </div>
   </div>
 </template>
