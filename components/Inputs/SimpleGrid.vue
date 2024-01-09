@@ -36,10 +36,10 @@ function isSelected (input) {
       <div
         v-for="(option, index) in options"
         :key="index"
-        class="card card-normal dark:bg-neutral-800 mb-5"
+        class="dark:bg-neutral-800 mb-5"
       >
-        <div class="card-body">
-          <div class="font-bold sm:text-2xl dark:text-slate-200 flex justify-between">
+        <div class="card-body -m-5 sm:m-0">
+          <div class="font-bold sm:text-2xl dark:text-slate-200 flex justify-between sm:p-0">
             <div>
               <input
                 id="{{ option.value }}"
