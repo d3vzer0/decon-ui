@@ -32,24 +32,24 @@ function isSelected (input) {
     >
       {{ title }}
     </h2>
-    <div class="simplegrid-container-options pt-5 grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4">
+    <div class="simplegrid-container-options pt-5 grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 gap-4">
       <div
         v-for="(option, index) in options"
         :key="index"
         class="card card-normal dark:bg-neutral-800 mb-5"
       >
         <div class="card-body">
-          <div class="font-bold text-2xl dark:text-slate-200 flex justify-between">
-            <span>
+          <div class="font-bold sm:text-2xl dark:text-slate-200 flex justify-between">
+            <div>
               <input
                 id="{{ option.value }}"
                 type="checkbox"
                 :checked="isSelected(option.value)"
-                class="checkbox"
+                class="checkbox sm:checkbox-lg"
                 @input="toggleSelection(option.value)"
               >
-            </span>
-            <div class="capitalize">
+            </div>
+            <div class="capitalize inline-block align-text-top">
               {{ option.value }}
             </div>
             <div>{{ option.count }}</div>
