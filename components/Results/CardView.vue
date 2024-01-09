@@ -39,7 +39,7 @@ function toUpper (input) {
         </div>
       </div>
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <p v-html="toMarkdown(data.description.raw)" />
+      <p class="text-clip overflow-hidden" v-html="toMarkdown(data.description.raw)" />
       <p class="truncate">
         <a
           :href="data.source.raw"
