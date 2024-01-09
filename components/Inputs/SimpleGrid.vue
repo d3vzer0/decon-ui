@@ -32,7 +32,7 @@ function isSelected (input) {
     >
       {{ title }}
     </h2>
-    <div class="simplegrid-container-options pt-5 grid xl:grid-cols-4 md:grid-cols-2 gap-4">
+    <div class="simplegrid-container-options pt-5 grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4">
       <div
         v-for="(option, index) in options"
         :key="index"
