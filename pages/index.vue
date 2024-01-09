@@ -86,7 +86,7 @@
     </div> 
     <div class="drawer-side pa-5">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-      <div class="min-w-72 max-w-80 bg-base-100 pr-10">
+      <div class="min-w-72 max-w-96 bg-base-100 pr-10">
           <div
             v-for="(value, key) in facets"
             :key="key"
@@ -136,7 +136,8 @@ const searchRequest = reactive({
     platform: { type: 'value', size: 10 },
     severity: { type: 'value', size: 10 },
     tactics: { type: 'value', size: 10 },
-    techniques: { type: 'value', size: 10 }
+    techniques: { type: 'value', size: 10 },
+    logsource: { type: 'value', size: 10 }
   },
   result_fields: {
     name: { raw: {}, snippet: { fallback: true } },
@@ -146,7 +147,8 @@ const searchRequest = reactive({
     platform: { raw: {}, snippet: { fallback: true } },
     source: { raw: {}, snippet: { size: 100, fallback: true } },
     tactics: { raw: {}, snippet: { fallback: true } },
-    techniques: { raw: {}, snippet: { fallback: true } }
+    techniques: { raw: {}, snippet: { fallback: true } },
+    logsource: { raw: {}, snippet: { fallback: true } }
   },
   search_fields: {
     name: { weight: 5 },
