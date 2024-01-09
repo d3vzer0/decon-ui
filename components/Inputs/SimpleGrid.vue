@@ -38,7 +38,7 @@ function isSelected (input) {
         :key="index"
         class="dark:bg-neutral-800 mb-5"
       >
-        <div class="card-body -m-5 sm:m-0">
+        <div class="card-body -m-2 sm:m-0">
           <div class="font-bold sm:text-2xl dark:text-slate-200 flex justify-between sm:p-0">
             <div>
               <input
