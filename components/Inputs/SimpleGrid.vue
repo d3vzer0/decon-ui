@@ -28,7 +28,7 @@ function isSelected (input) {
   <div class="simplegrid-container">
     <h2
       v-if="title"
-      class="text-lg uppercase font-bold dark:text-slate-200"
+      class="text-lg uppercase font-bold text-slate-200"
     >
       {{ title }}
     </h2>
@@ -36,10 +36,10 @@ function isSelected (input) {
       <div
         v-for="(option, index) in options"
         :key="index"
-        class="dark:bg-neutral-800 mb-5"
+        class="bg-neutral-800 mb-5"
       >
         <div class="card-body -m-2 sm:m-0">
-          <div class="font-bold sm:text-2xl dark:text-slate-200 flex justify-between sm:p-0">
+          <div class="font-bold sm:text-2xl text-slate-200 flex justify-between sm:p-0">
             <div>
               <input
                 id="{{ option.value }}"

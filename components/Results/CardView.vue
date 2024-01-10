@@ -20,15 +20,15 @@ function toUpper (input) {
 </script>
 
 <template>
-  <div class="card card-normal dark:bg-neutral-800 mb-5 text-wrap">
+  <div class="card card-normal bg-neutral-800 mb-5 text-wrap">
     <div class="card-body">
       <h2 class="font-medium">
         {{ toUpper(data.platform.raw) }} {{ data.kind.raw }}
       </h2>
-      <h2 class="font-bold text-2xl dark:text-slate-200">
+      <h2 class="font-bold text-2xl text-slate-200">
         {{ data.name.raw }}
       </h2>
-      <div class="flex dark:text-slate-200">
+      <div class="flex text-slate-200">
         <div>{{ data.severity.raw }}</div>
         <div
           v-for="(tactic, index) in data.tactics.raw"

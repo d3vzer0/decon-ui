@@ -86,7 +86,7 @@
     </div> 
     <div class="drawer-side pa-5">
       <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-      <div class="min-w-72 max-w-96 bg-base-100 pr-10">
+      <div class="w-80 min-w-80 max-w-96 bg-base-100 pr-10">
           <div
             v-for="(value, key) in facets"
             :key="key"

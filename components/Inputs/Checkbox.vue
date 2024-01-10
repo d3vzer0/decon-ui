@@ -61,7 +61,7 @@ function isSelected (input) {
                 @input="toggleSelection(option.value)"
               >
             </span>
-            <span class="px-5 align-top capitalize">{{ option.value }}</span>
+            <span class="px-5 align-top capitalize truncate">{{ option.value }}</span>
             <span class="align-top float-right">{{ option.count }}</span>
           </span>
         </li>
