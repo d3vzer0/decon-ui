@@ -137,7 +137,7 @@ const searchRequest = reactive({
     severity: { type: 'value', size: 10 },
     tactics: { type: 'value', size: 10 },
     techniques: { type: 'value', size: 10 },
-    logsource: { type: 'value', size: 10 }
+    // logsource: { type: 'value', size: 15 }
   },
   result_fields: {
     name: { raw: {}, snippet: { fallback: true } },
@@ -148,7 +148,7 @@ const searchRequest = reactive({
     source: { raw: {}, snippet: { size: 100, fallback: true } },
     tactics: { raw: {}, snippet: { fallback: true } },
     techniques: { raw: {}, snippet: { fallback: true } },
-    logsource: { raw: {}, snippet: { fallback: true } }
+    // logsource: { raw: {}, snippet: { fallback: true } }
   },
   search_fields: {
     name: { weight: 5 },
