@@ -44,7 +44,8 @@ const searchRequest = reactive({
     logsource: { raw: {}, snippet: { size: 100, fallback: true } },
     tactics: { raw: {}, snippet: { fallback: true } },
     techniques: { raw: {}, snippet: { fallback: true } },
-    raw_content: { raw: {}, snippet: {fallback: true }} 
+    raw_content: { raw: {}, snippet: {fallback: true }},
+    query: { raw: {}, snippet: {fallback: true }},
   },
   search_fields: {
     name: { weight: 5 },

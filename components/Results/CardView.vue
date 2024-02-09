@@ -10,6 +10,8 @@ const convertOptions = ref(['m365d'])
 const convertResult = ref('')
 const convertEndpoint = 'https://sigma.optyx.io/api/v1/sigma/convert'
 
+const rawContent = ref('')
+
 const markdown = new MarkdownIt()
 function toMarkdown (input) {
   const markdownToHtml = markdown.render(input)
@@ -22,7 +24,14 @@ function toUpper (input) {
   return newString
 }
 
+function prettifyJson (input) {
+  console.log(input)
+  // const jsonObject = JSON.parse(input)
+  // return JSON.stringify(jsonObject, null, 2)
+}
+
 async function convertSigma (content, target) {
+  console.log(1)
   const { data, pending, error, refresh } = await useFetch(convertEndpoint, {
     method: 'POST',
     body: { content: content, target: target },
@@ -40,6 +49,7 @@ async function convertSigma (content, target) {
 
 <template>
   <div class="card card-normal bg-neutral-800 mb-5 text-wrap">
+    
     <dialog id="convert_modal" class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Converted rule</h3>
@@ -49,6 +59,17 @@ async function convertSigma (content, target) {
         <button>close</button>
       </form>
     </dialog>
+
+    <dialog id="content_modal" class="modal">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">Raw content</h3>
+        <p class="py-4">{{ prettifyJson(rawContent) }}</p>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+
     <div class="card-body">
       <div class="flex justify-between">
         <div>
@@ -56,15 +77,19 @@ async function convertSigma (content, target) {
             {{ toUpper(data.platform.raw) }} {{ data.kind.raw }}
           </h2>
         </div>
-        <div v-if="data.platform.raw == 'sigma'">
-          <details class="dropdown">
-            <summary class="m-1 btn btn-outline btn-accent btn-xs">convert</summary>
-            <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+        <div>
+          <!-- <summary class="m-1 btn btn-outline btn-secondary btn-xs">
+            <a onclick="document.getElementById('content_modal').showModal()"
+            @click="rawContent=data.query.raw">view</a>
+          </summary> -->
+          <div class="dropdown" v-if="data.platform.raw == 'sigma'">
+            <div tabindex="0" role="button"  class="m-1 btn btn-outline btn-accent btn-xs">convert</div>
+            <ul tabindex="0" class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
               <li v-for="(name, index) in convertOptions" :key="index">
                 <a onclick="document.getElementById('convert_modal').showModal()" @click="convertSigma(data.raw_content.raw, name)">{{ name }}</a>
               </li>
             </ul>
-          </details>
+          </div>
         </div>
       </div>
       <h2 class="font-bold text-2xl text-slate-200">
