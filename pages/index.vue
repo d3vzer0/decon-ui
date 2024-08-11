@@ -2,11 +2,16 @@
 <script setup>
 import { ref } from 'vue'
 import { useSelectionStore } from '@/stores/selection'
+import { useSigmaStore } from '@/stores/targets'
 import { storeToRefs } from 'pinia'
 
 // Initialise (global) stores
 const store = useSelectionStore()
 const { optionsSelected } = storeToRefs(store)
+
+
+const SigmaStore = useSigmaStore()
+const { targetList } = storeToRefs(SigmaStore)
 
 // Initialise refs
 const facets = reactive({})

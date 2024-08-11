@@ -1,5 +1,5 @@
 <script setup>
-import { useSelectionStore } from '@/stores/selection'
+import { useSelectionStore } from '/stores/selection'
 import { storeToRefs } from 'pinia'
 
 const props = defineProps({

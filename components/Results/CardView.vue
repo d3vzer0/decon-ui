@@ -1,12 +1,19 @@
 <script setup>
 import MarkdownIt from 'markdown-it'
 import DOMPurify from 'dompurify'
+import { useSigmaStore } from '@/stores/targets'
+import { storeToRefs } from 'pinia'
+
+// Initialise (global) stores
+const sigmaStore = useSigmaStore()
+const { targetList } = storeToRefs(sigmaStore)
+
+
 
 defineProps({
   data: Object // eslint-disable-line
 })
 
-const convertOptions = ref(['m365d'])
 const convertResult = ref('')
 const convertEndpoint = 'https://sigma.optyx.io/api/v1/sigma/convert'
 
@@ -82,10 +89,11 @@ async function convertSigma (content, target) {
             <a onclick="document.getElementById('content_modal').showModal()"
             @click="rawContent=data.query.raw">view</a>
           </summary> -->
+          
           <div class="dropdown" v-if="data.platform.raw == 'sigma'">
             <div tabindex="0" role="button"  class="m-1 btn btn-outline btn-accent btn-xs">convert</div>
             <ul tabindex="0" class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-              <li v-for="(name, index) in convertOptions" :key="index">
+              <li v-for="(name, index) in targetList" :key="index">
                 <a onclick="document.getElementById('convert_modal').showModal()" @click="convertSigma(data.raw_content.raw, name)">{{ name }}</a>
               </li>
             </ul>

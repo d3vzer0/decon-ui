@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: [
+    "./stories/*.{js,ts,jsx,tsx,mdx,vue}"
+  ],
   theme: {
     extend: {},
   },
